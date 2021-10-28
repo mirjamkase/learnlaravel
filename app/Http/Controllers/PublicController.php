@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
 {
@@ -12,7 +14,9 @@ class PublicController extends Controller
         return view('home', compact('name', 'array'));
     }
     public function posts(){
-        return view('posts');
+//$posts = DB::table('posts')->select(['title', 'id'])->where('title', 'LIKE', '%a.')->where('id', '<','500')->limit(10)->orderBy('title','desc')->get();
+        $posts = Post::all();
+       return view('posts', compact('posts'));
     }
 }
 
